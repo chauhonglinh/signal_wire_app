@@ -3,8 +3,10 @@ class ApplicationController < ActionController::API
     yield
   rescue UnprocessableEntityException => uee
     render json: { error: uee.message }, status: :unprocessable_entity
+  rescue ActionController::ParameterMissing => parameter_missing
+    render json: { error: parameter_missing.message }, status: :unprocessable_entity
   rescue StandardError => exc
-    Rails.logger.error("Error: #{exc.message}\n#{exc.backtrace.join("\n")}")
+    Rails.logger.error("#{exc.class} Error: #{exc.message}\n#{exc.backtrace.join("\n")}")
     render json: { error: error_message }, status: :internal_server_error
   end
 end

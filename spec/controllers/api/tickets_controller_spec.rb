@@ -30,7 +30,7 @@ RSpec.describe Api::TicketsController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
 
       info = JSON.parse(response.body)
-      expect(info['error']).to eql("Validation failed: User can't be blank, User is not a number")
+      expect(info['error']).to eql("param is missing or the value is empty: user_id")
     end
 
     it 'sends back the error 422 if user_id is not a number' do
@@ -48,7 +48,7 @@ RSpec.describe Api::TicketsController, type: :controller do
       expect(response).to have_http_status(:unprocessable_entity)
 
       info = JSON.parse(response.body)
-      expect(info['error']).to eql("Validation failed: Title can't be blank")
+      expect(info['error']).to eql("param is missing or the value is empty: title")
     end
 
     it 'sends back the error 422 if there are more than 5 tags' do

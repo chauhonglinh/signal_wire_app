@@ -16,6 +16,10 @@ class Api::TicketsController < ApplicationController
   private
 
   def params_for_create
-    params.permit([:user_id, :title, tags: []])
+    {
+      user_id: params.require(:user_id),
+      title: params.require(:title),
+      tags: params[:tags]
+    }
   end
 end
