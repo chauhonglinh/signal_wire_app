@@ -1,0 +1,2 @@
+class  UnprocessableEntityException < RuntimeError
+end
